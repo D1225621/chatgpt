@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8"> <!-- 設定頁面編碼為 UTF-8，支援中文 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 確保響應式設計，適配不同設備 -->
+    <title>ChatGPT 登入</title> <!-- 頁面標題 -->
+    <!-- 引入 Google Material Icons，用於顯示電話圖標 -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* 設定字體為 Arial 或無襯線字體 */
+            display: flex; /* 使用 Flexbox 佈局 */
+            justify-content: center; /* 水平置中內容 */
+            align-items: center; /* 垂直置中內容 */
+            height: 100vh; /* 設定 body 高度為視窗高度 */
+            margin: 0; /* 移除預設邊距 */
+            position: relative; /* 為絕對定位的標誌提供參考點 */
+        }
+        .logo {
+            position: absolute; /* 絕對定位標誌 */
+            top: 20px; /* 距離頂部 20px */
+            left: 20px; /* 距離左邊 20px */
+            font-size: 20px; /* 標誌字體大小 */
+            font-weight: bold; /* 標誌文字加粗 */
+            color: #000; /* 標誌文字顏色為黑色 */
+        }
+        .container {
+            text-align: center; /* 內容居中對齊 */
+            background-color: white; /* 容器背景為白色 */
+            padding: 20px; /* 容器內邊距 */
+        }
+        h1 {
+            font-size: 30px; /* 標題字體大小 */
+            margin-bottom: 20px; /* 標題底部邊距 */
+        }
+        input[type="text"] {
+            width: 100%; /* 輸入框寬度佔滿容器 */
+            padding: 15px; /* 輸入框內邊距 */
+            margin-bottom: 10px; /* 輸入框底部邊距 */
+            border: 1px solid #ccc; /* 輸入框邊框 */
+            border-radius: 5px; /* 輸入框圓角 */
+            box-sizing: border-box; /* 確保 padding 包含在寬度內 */
+        }
+        button {
+            width: 100%; /* 按鈕寬度佔滿容器 */
+            padding: 15px; /* 按鈕內邊距 */
+            margin-bottom: 20px; /* 按鈕底部邊距 */
+            background-color: #10a37f; /* 按鈕背景顏色 */
+            color: white; /* 按鈕文字顏色 */
+            border: none; /* 移除邊框 */
+            border-radius: 5px; /* 按鈕圓角 */
+            cursor: pointer; /* 鼠標懸停時顯示手型 */
+        }
+        button:hover {
+            background-color: #0e8c6e; /* 懸停時按鈕背景變暗 */
+        }
+
+        .divider {
+            display: flex; /* 使用 Flexbox 佈局 */
+            align-items: center; /* 垂直居中對齊 */
+            justify-content: center; /* 水平置中內容 */
+            margin: 20px 0; /* 上下邊距 */
+        }
+        .divider span {
+            margin: 0 10px; /* 文字左右邊距 */
+            color: black; /* 文字顏色為灰色 */
+        }
+        .divider hr {
+            flex: 1; /* 水平線佔滿剩餘空間 */
+            border: none; /* 移除預設邊框 */
+            border-top: 1px solid #ccc; /* 上方加一條灰色線 */
+        }
+        .social-login {
+            display: flex; /* 使用 Flexbox 佈局 */
+            flex-direction: column; /* 垂直排列 */
+            gap: 10px; /* 按鈕間距 */
+        }
+        .social-login button {
+            display: flex; /* 使用 Flexbox 佈局 */
+            align-items: center; /* 垂直居中對齊 */
+            justify-content: center; /* 水平居中對齊 */
+            background-color: white; /* 背景為白色 */
+            color: black; /* 文字為黑色 */
+            border: 1px solid #ccc; /* 邊框 */
+            padding: 10px; /* 內邊距 */
+            border-radius: 5px; /* 圓角 */
+            cursor: pointer; /* 鼠標懸停時顯示手型 */
+        }
+        .social-login button img {
+            width: 30px; /* 圖標寬度 */
+            margin-right: 5px; /* 圖標與文字間距 */
+        }
+        .social-login button .material-icons {
+            font-size: 20px; /* 圖標字體大小 */
+            margin-right: 10px; /* 圖標與文字間距 */
+            color: #000; /* 圖標顏色 */
+        }
+        .social-login button:hover {
+            background-color: #D0D0D0; /* 懸停時背景變淺 */
+        }
+        .footer {
+            margin-top: 20px; /* 頂部邊距 */
+            font-size: 12px; /* 字體大小 */
+            color: #666; /* 文字顏色 */
+        }
+        .footer a {
+            color: #10a37f; /* 連結顏色 */
+            text-decoration: none; /* 移除底線 */
+        }
+        /* 媒體查詢：螢幕寬度小於 768px 時調整標誌位置 */
+        @media (max-width: 768px) {
+            .logo {
+                left: 50%; /* 水平置中 */
+                transform: translateX(-50%); /* 修正置中偏移 */
+                top: 50px; /* 靠近 "歡迎回來" */
+            }
+            .container {
+                margin-top: 40px; /* 確保容器不與標誌重疊 */
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="logo">ChatGPT</div> <!-- 左上角或置中的標誌 -->
+<div class="container">
+    <h1>歡迎回來</h1> <!-- 主標題 -->
+    <input type="text" placeholder="電子郵件地址"> <!-- 輸入框 -->
+    <button>繼續</button> <!-- 繼續按鈕 -->
+    <span>還沒有帳戶嗎？註冊</span>
+    <div class="divider">
+
+        <hr><span>或</span><hr> <!-- 分隔線與文字 -->
+    </div>
+    <div class="social-login">
+        <button>
+            <img src="https://www.google.com/favicon.ico" alt="Google">
+            使用 Google 帳戶繼續
+        </button>
+        <button>
+            <img src="https://www.microsoft.com/favicon.ico" alt="Microsoft">
+            使用 Microsoft 帳戶繼續
+        </button>
+        <button>
+            <img src="https://www.apple.com/favicon.ico" alt="Apple">
+            使用 Apple 帳戶繼續
+        </button>
+        <button>
+            <span class="material-icons">phone</span>
+            使用電話註冊
+        </button>
+    </div>
+    <div class="footer">
+        <a href="#">使用條款</a> | <a href="#">隱私權政策</a> <!-- 頁腳連結 -->
+    </div>
+</div>
+</body>
+</html>

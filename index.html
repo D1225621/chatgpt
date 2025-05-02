@@ -35,26 +35,27 @@
         }
         input[type="text"] {
             width: 100%; /* 輸入框寬度佔滿容器 */
-            padding: 15px; /* 輸入框內邊距 */
-            margin-bottom: 10px; /* 輸入框底部邊距 */
+            padding: 18px; /* 輸入框內邊距 */
+            margin-bottom: 20px; /* 輸入框底部邊距 */
             border: 1px solid #ccc; /* 輸入框邊框 */
             border-radius: 5px; /* 輸入框圓角 */
             box-sizing: border-box; /* 確保 padding 包含在寬度內 */
+            font-size: 16px;/* 標題字體大小 */
         }
         button {
             width: 100%; /* 按鈕寬度佔滿容器 */
-            padding: 15px; /* 按鈕內邊距 */
-            margin-bottom: 20px; /* 按鈕底部邊距 */
+            padding: 18px; /* 按鈕內邊距 */
+            margin-bottom: 10px; /* 按鈕底部邊距 */
             background-color: #10a37f; /* 按鈕背景顏色 */
             color: white; /* 按鈕文字顏色 */
             border: none; /* 移除邊框 */
             border-radius: 5px; /* 按鈕圓角 */
             cursor: pointer; /* 鼠標懸停時顯示手型 */
+            font-size: 16px;/* 標題字體大小 */
         }
         button:hover {
             background-color: #0e8c6e; /* 懸停時按鈕背景變暗 */
         }
-
         .divider {
             display: flex; /* 使用 Flexbox 佈局 */
             align-items: center; /* 垂直居中對齊 */
@@ -78,7 +79,6 @@
         .social-login button {
             display: flex; /* 使用 Flexbox 佈局 */
             align-items: center; /* 垂直居中對齊 */
-            justify-content: center; /* 水平居中對齊 */
             background-color: white; /* 背景為白色 */
             color: black; /* 文字為黑色 */
             border: 1px solid #ccc; /* 邊框 */
@@ -121,37 +121,69 @@
     </style>
 </head>
 <body>
-<div class="logo">ChatGPT</div> <!-- 左上角或置中的標誌 -->
-<div class="container">
-    <h1>歡迎回來</h1> <!-- 主標題 -->
-    <input type="text" placeholder="電子郵件地址"> <!-- 輸入框 -->
-    <button>繼續</button> <!-- 繼續按鈕 -->
-    <span>還沒有帳戶嗎？註冊</span>
-    <div class="divider">
+    <div class="logo">ChatGPT</div> <!-- 左上角或置中的標誌 -->
+    <div class="container">
+        <h1>歡迎回來</h1> <!-- 主標題 -->
+        <input type="text" id="emailInput" placeholder="電子郵件地址"> <!-- 輸入框，添加 ID 用於 JS 操作 -->
+        <button id="continueButton">繼續</button> <!-- 繼續按鈕，添加 ID 用於 JS 操作 -->
+        <div class="divider">
+            <span>還沒有帳戶嗎？註冊</span>
+        </div>
+        <div class="divider">
+            <hr><span>或</span><hr> <!-- 分隔線與文字 -->
+        </div>
+        <div class="social-login">
+            <button class="social-button" data-provider="Google"> <!-- 社交按鈕，添加類別和 data 屬性 -->
+                <img src="https://www.google.com/favicon.ico" alt="Google">
+                使用 Google 帳戶繼續
+            </button>
+            <button class="social-button" data-provider="Microsoft">
+                <img src="https://www.microsoft.com/favicon.ico" alt="Microsoft">
+                使用 Microsoft 帳戶繼續
+            </button>
+            <button class="social-button" data-provider="Apple">
+                <img src="https://www.apple.com/favicon.ico" alt="Apple">
+                使用 Apple 帳戶繼續
+            </button>
+            <button class="social-button" data-provider="Phone">
+                <span class="material-icons">phone</span>
+                使用電話註冊
+            </button>
+        </div>
+        <div class="footer">
+            <a href="#">使用條款</a> | <a href="#">隱私權政策</a> <!-- 頁腳連結 -->
+        </div>
+    </div>
 
-        <hr><span>或</span><hr> <!-- 分隔線與文字 -->
-    </div>
-    <div class="social-login">
-        <button>
-            <img src="https://www.google.com/favicon.ico" alt="Google">
-            使用 Google 帳戶繼續
-        </button>
-        <button>
-            <img src="https://www.microsoft.com/favicon.ico" alt="Microsoft">
-            使用 Microsoft 帳戶繼續
-        </button>
-        <button>
-            <img src="https://www.apple.com/favicon.ico" alt="Apple">
-            使用 Apple 帳戶繼續
-        </button>
-        <button>
-            <span class="material-icons">phone</span>
-            使用電話註冊
-        </button>
-    </div>
-    <div class="footer">
-        <a href="#">使用條款</a> | <a href="#">隱私權政策</a> <!-- 頁腳連結 -->
-    </div>
-</div>
+    <!-- 添加 JavaScript -->
+    <script>
+        // 獲取 DOM 元素
+        const emailInput = document.getElementById('emailInput'); // 電子郵件輸入框
+        const continueButton = document.getElementById('continueButton'); // 繼續按鈕
+        const socialButtons = document.querySelectorAll('.social-button'); // 所有社交登錄按鈕
+
+        // 為 "繼續" 按鈕添加點擊事件監聽器
+        continueButton.addEventListener('click', () => {
+            const email = emailInput.value.trim(); // 獲取並清理輸入的電子郵件
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 簡單的電子郵件格式正則表達式
+
+            // 驗證電子郵件格式
+            if (!email) {
+                alert('請輸入電子郵件地址！'); // 如果輸入框為空，顯示提示
+            } else if (!emailPattern.test(email)) {
+                alert('請輸入有效的電子郵件地址！'); // 如果格式不正確，顯示提示
+            } else {
+                alert('此為釣魚網站，請勿登入!!');
+            }
+        });
+
+        // 為每個社交登錄按鈕添加點擊事件監聽器
+        socialButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const provider = button.getAttribute('data-provider'); // 獲取按鈕的提供者（如 Google、Microsoft 等）
+                alert('此為釣魚網站，請勿登入!!');
+            });
+        });
+    </script>
 </body>
 </html>
